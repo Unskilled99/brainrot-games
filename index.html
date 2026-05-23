@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>腦殘遊戲實體化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 主選單 -->
+        <div id="main-menu" class="screen active">
+            <h1 class="title">腦殘遊戲實體化</h1>
+            <p class="subtitle">終結廣告詐騙，還原遊戲體驗</p>
+            
+            <div class="carousel-container">
+                <button id="prev-btn" class="arrow-btn">◀</button>
+                <div class="carousel">
+                    <div class="game-card active" data-game="tower">
+                        <h2>數字爬塔 (Tower 67)</h2>
+                        <div class="game-preview">
+                            <div class="preview-box blue">+100</div>
+                            <div class="preview-box red">x5</div>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="shooter">
+                        <h2>腦殘射擊遊戲</h2>
+                        <div class="game-preview">
+                            <div class="preview-box">+1 Clone</div>
+                            <div class="preview-box enemy">Boss</div>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="path">
+                        <h2>選擇路線</h2>
+                        <div class="game-preview">
+                            <div class="preview-box green">+50</div>
+                            <div class="preview-box red">/2</div>
+                        </div>
+                    </div>
+                </div>
+                <button id="next-btn" class="arrow-btn">▶</button>
+            </div>
+            
+            <button id="start-btn" class="action-btn">確認進入！！！</button>
+        </div>
+
+        <!-- 遊戲畫面 -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="info-left">
+                    <div id="current-game-name">遊戲名稱</div>
+                    <div id="current-difficulty">難度: 普通</div>
+                </div>
+                <div class="info-right">
+                    <div id="current-iq">IQ: 15</div>
+                </div>
+            </div>
+            
+            <div id="game-container">
+                <!-- 遊戲內容將會渲染在這裡 -->
+                <div class="placeholder-text">
+                    遊戲載入中...<br>
+                    <span style="font-size: 1rem; color: #666;">(這裡將會放置遊戲的 Canvas 或 DOM 元素)</span>
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <button id="surrender-btn" class="danger-btn">放棄挑戰</button>
+                <button id="win-cheat-btn" class="cheat-btn">模擬勝利(測試)</button>
+                <button id="lose-cheat-btn" class="cheat-btn">模擬失敗(測試)</button>
+            </div>
+        </div>
+
+        <!-- 結算畫面 -->
+        <div id="settlement-screen" class="screen">
+            <h1 id="result-title">LOSE!!!</h1>
+            
+            <div class="iq-box">
+                <h2>目前 IQ:<br><span id="final-iq">114514</span></h2>
+                <p>(超越全球 <span id="percentile">67</span>% 的人)</p>
+            </div>
+            
+            <div class="settlement-actions">
+                <button id="retry-btn" class="action-btn">再玩一次</button>
+                <button id="back-to-menu-btn" class="action-btn">回主選單</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

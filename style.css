@@ -1,0 +1,263 @@
+:root {
+    --bg-color: #a4bdf6;
+    --card-bg: #4a76c9;
+    --text-dark: #333;
+    --text-light: #fff;
+    --accent-red: #ff3333;
+    --accent-blue: #00bfff;
+    --accent-green: #33cc33;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Microsoft JhengHei", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    max-height: 600px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* 主選單樣式 */
+#main-menu {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 30px 0;
+}
+
+.arrow-btn {
+    background: none;
+    border: none;
+    font-size: 3rem;
+    color: var(--accent-red);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.arrow-btn:hover {
+    transform: scale(1.2);
+}
+
+.carousel {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px;
+    border: 2px solid #333;
+}
+
+.game-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-bg);
+    color: var(--text-light);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.game-card.active {
+    display: flex;
+}
+
+.game-preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.preview-box {
+    width: 60px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid #333;
+    background: #ccc;
+    color: #333;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.preview-box.blue { background-color: var(--accent-blue); color: white; }
+.preview-box.red { background-color: #ffb3b3; }
+.preview-box.green { background-color: var(--accent-green); color: white; }
+.preview-box.enemy { background-color: #666; color: white; }
+
+.action-btn {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* 遊戲畫面樣式 */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.info-left {
+    display: flex;
+    flex-direction: column;
+}
+
+#current-difficulty {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+#game-container {
+    flex-grow: 1;
+    border: 2px solid #333;
+    margin: 20px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+.placeholder-text {
+    text-align: center;
+    color: #999;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.danger-btn {
+    padding: 10px 20px;
+    background-color: var(--accent-red);
+    color: white;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cheat-btn {
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #333;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 結算畫面樣式 */
+#settlement-screen {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#result-title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #333;
+}
+
+#result-title.win { color: var(--accent-green); }
+#result-title.lose { color: var(--accent-red); }
+
+.iq-box {
+    border: 2px solid #333;
+    padding: 30px;
+    margin-bottom: 30px;
+    width: 80%;
+    background-color: #f0f0f0;
+}
+
+.iq-box h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+#final-iq {
+    font-size: 3rem;
+    color: var(--accent-blue);
+}
+
+.settlement-actions {
+    display: flex;
+    gap: 20px;
+}
