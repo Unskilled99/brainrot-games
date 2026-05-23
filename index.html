@@ -5,11 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>腦殘遊戲實體化</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="games/tower.css">
+    <link rel="stylesheet" href="games/pin.css">
+    <link rel="stylesheet" href="games/spelling.css">
+    <link rel="stylesheet" href="games/shooter.css">
+    <link rel="stylesheet" href="editor.css">
 </head>
 <body>
     <div id="app">
+        <!-- 全域亮度遮罩 -->
+        <div id="brightness-filter"></div>
+
         <!-- 主選單 -->
         <div id="main-menu" class="screen active">
+            <div class="menu-top-bar">
+                <button id="settings-btn" class="icon-btn">⚙️ 設定</button>
+                <button id="achievements-btn" class="icon-btn">🏆 成就</button>
+            </div>
+            
             <h1 class="title">腦殘遊戲實體化</h1>
             <p class="subtitle">終結廣告詐騙，還原遊戲體驗</p>
             
@@ -23,6 +36,20 @@
                             <div class="preview-box red">x5</div>
                         </div>
                     </div>
+                    <div class="game-card" data-game="pin">
+                        <h2>拔插銷 (消除版)</h2>
+                        <div class="game-preview">
+                            <div class="preview-box blue" style="border-radius:50%">💦</div>
+                            <div class="preview-box green" style="background:#ffcc00">🔑</div>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="spelling">
+                        <h2>Spelling</h2>
+                        <div class="game-preview">
+                            <div class="preview-box" style="background:#eee">A</div>
+                            <div class="preview-box" style="background:#eee">M</div>
+                        </div>
+                    </div>
                     <div class="game-card" data-game="shooter">
                         <h2>腦殘射擊遊戲</h2>
                         <div class="game-preview">
@@ -30,18 +57,14 @@
                             <div class="preview-box enemy">Boss</div>
                         </div>
                     </div>
-                    <div class="game-card" data-game="path">
-                        <h2>選擇路線</h2>
-                        <div class="game-preview">
-                            <div class="preview-box green">+50</div>
-                            <div class="preview-box red">/2</div>
-                        </div>
-                    </div>
                 </div>
                 <button id="next-btn" class="arrow-btn">▶</button>
             </div>
             
-            <button id="start-btn" class="action-btn">確認進入！！！</button>
+            <div class="main-actions">
+                <button id="start-btn" class="action-btn">進入遊戲！！！</button>
+                <button id="editor-btn" class="action-btn editor-btn-style">自定義模式 (造地圖)</button>
+            </div>
         </div>
 
         <!-- 遊戲畫面 -->
@@ -53,40 +76,112 @@
                 </div>
                 <div class="info-right">
                     <div id="current-iq">IQ: 15</div>
+                    <button id="pause-btn" class="icon-btn" style="margin-left: 10px;">⏸️ 暫停</button>
                 </div>
             </div>
             
             <div id="game-container">
                 <!-- 遊戲內容將會渲染在這裡 -->
-                <div class="placeholder-text">
-                    遊戲載入中...<br>
-                    <span style="font-size: 1rem; color: #666;">(這裡將會放置遊戲的 Canvas 或 DOM 元素)</span>
-                </div>
+                <div class="placeholder-text">遊戲載入中...</div>
             </div>
             
             <div class="game-controls">
-                <button id="surrender-btn" class="danger-btn">放棄挑戰</button>
-                <button id="win-cheat-btn" class="cheat-btn">模擬勝利(測試)</button>
-                <button id="lose-cheat-btn" class="cheat-btn">模擬失敗(測試)</button>
+                <button id="win-cheat-btn" class="cheat-btn">模擬勝利</button>
+                <button id="lose-cheat-btn" class="cheat-btn">模擬失敗</button>
+            </div>
+        </div>
+
+        <!-- 自定義編輯器畫面 -->
+        <div id="editor-screen" class="screen">
+            <div class="editor-header">
+                <h2>自定義模式 (地圖編輯器)</h2>
+                <div>
+                    <button id="editor-play-btn" class="action-btn small">▶️ 試玩</button>
+                    <button id="editor-save-btn" class="action-btn small">💾 存檔</button>
+                    <button id="editor-load-btn" class="action-btn small">📂 讀檔</button>
+                    <button id="editor-exit-btn" class="danger-btn small">退出</button>
+                </div>
+            </div>
+            <div class="editor-body">
+                <div class="editor-toolbar">
+                    <h3>工具列</h3>
+                    <div class="tool-item" draggable="true" data-type="player">👦 人物</div>
+                    <div class="tool-item" draggable="true" data-type="enemy">👹 敵人</div>
+                    <div class="tool-item" draggable="true" data-type="shape">⬛ 形狀塊</div>
+                    <div class="tool-item" draggable="true" data-type="text">📝 文字方塊</div>
+                    <div class="tool-item" draggable="true" data-type="number">1️⃣ 數字方塊</div>
+                    <div class="tool-item" draggable="true" data-type="goal">🏁 終點</div>
+                </div>
+                <div class="editor-canvas-container">
+                    <div id="editor-canvas"></div>
+                </div>
+                <div class="editor-properties">
+                    <h3>屬性面板</h3>
+                    <div id="prop-panel-content">
+                        <p style="color:#666; font-size:0.9rem;">請點選畫布上的元件</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 結算畫面 -->
         <div id="settlement-screen" class="screen">
             <h1 id="result-title">LOSE!!!</h1>
-            
             <div class="iq-box">
                 <h2>目前 IQ:<br><span id="final-iq">114514</span></h2>
                 <p>(超越全球 <span id="percentile">67</span>% 的人)</p>
             </div>
-            
             <div class="settlement-actions">
                 <button id="retry-btn" class="action-btn">再玩一次</button>
                 <button id="back-to-menu-btn" class="action-btn">回主選單</button>
             </div>
         </div>
+
+        <!-- Overlays -->
+        <div id="settings-overlay" class="overlay">
+            <div class="overlay-content">
+                <h2>設定</h2>
+                <div class="setting-item">
+                    <label>音量大小</label>
+                    <input type="range" id="volume-slider" min="0" max="100" value="50">
+                </div>
+                <div class="setting-item">
+                    <label>畫面亮度</label>
+                    <input type="range" id="brightness-slider" min="50" max="150" value="100">
+                </div>
+                <button id="close-settings-btn" class="action-btn">關閉</button>
+            </div>
+        </div>
+
+        <div id="achievements-overlay" class="overlay">
+            <div class="overlay-content">
+                <h2>成就列表</h2>
+                <ul id="achievement-list" class="achievement-list">
+                    <li id="ach-tower" class="locked" data-name="The 67 (Tower 67)">🔒 ???</li>
+                    <li id="ach-pin" class="locked" data-name="另闢蹊徑 (拔插銷)">🔒 ???</li>
+                    <li id="ach-shooter" class="locked" data-name="燒焦味... (射擊遊戲)">🔒 ???</li>
+                    <li id="ach-spell" class="locked" data-name="真正的劇情 (Spelling)">🔒 ???</li>
+                </ul>
+                <button id="close-achievements-btn" class="action-btn">關閉</button>
+            </div>
+        </div>
+
+        <div id="pause-overlay" class="overlay">
+            <div class="overlay-content">
+                <h2>遊戲暫停</h2>
+                <button id="resume-btn" class="action-btn">繼續遊戲</button>
+                <button id="pause-surrender-btn" class="danger-btn" style="margin-top: 10px;">放棄挑戰</button>
+            </div>
+        </div>
+
     </div>
 
+    <script src="games/tower.js"></script>
+    <script src="games/pin.js"></script>
+    <script src="games/spelling.js"></script>
+    <script src="games/shooter.js"></script>
+    <script src="engine.js"></script>
+    <script src="editor.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

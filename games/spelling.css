@@ -1,0 +1,50 @@
+.spelling-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+
+.spelling-header {
+    padding: 15px;
+    background-color: #fff;
+    border-bottom: 2px solid #ccc;
+    font-weight: bold;
+    text-align: center;
+}
+
+.spelling-msg {
+    margin-top: 5px;
+    min-height: 20px;
+}
+
+.spelling-scroll {
+    flex-grow: 1;
+    overflow: auto;
+    padding: 20px;
+    cursor: grab;
+}
+
+.spelling-grid {
+    display: grid;
+    gap: 2px;
+    background-color: #ccc;
+    padding: 2px;
+    width: max-content;
+}
+
+.spelling-cell {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    text-transform: uppercase;
+}
+
+.spelling-cell:focus {
+    outline: 2px solid var(--accent-blue);
+    background-color: #e6f7ff;
+}

@@ -1,0 +1,93 @@
+/* 自定義編輯器樣式 */
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.editor-body {
+    display: flex;
+    flex-grow: 1;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.editor-toolbar {
+    width: 120px;
+    background: #eee;
+    border: 2px solid #333;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.tool-item {
+    background: #fff;
+    border: 2px solid #666;
+    padding: 10px;
+    text-align: center;
+    cursor: grab;
+    user-select: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.tool-item:active { cursor: grabbing; }
+
+.editor-canvas-container {
+    flex-grow: 1;
+    background: #ddd;
+    border: 2px solid #333;
+    position: relative;
+    overflow: auto;
+}
+
+#editor-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1000px;
+    height: 1000px;
+    background-image: 
+        linear-gradient(#ccc 1px, transparent 1px),
+        linear-gradient(90deg, #ccc 1px, transparent 1px);
+    background-size: 50px 50px; /* 網格大小 */
+    background-color: #fafafa;
+}
+
+.editor-properties {
+    width: 200px;
+    background: #eee;
+    border: 2px solid #333;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* 畫布上的元件 */
+.canvas-element {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border: 2px solid #333;
+    cursor: pointer;
+    user-select: none;
+}
+.canvas-element.selected {
+    outline: 3px solid var(--accent-blue);
+    z-index: 100;
+}
+
+.ce-player { background: var(--accent-blue); color: white; }
+.ce-enemy { background: var(--accent-red); color: white; }
+.ce-shape { background: #999; }
+.ce-text { background: white; font-size: 1rem; }
+.ce-number { background: #ffcc00; }
+.ce-goal { background: white; border: 2px dashed #333; }

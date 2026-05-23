@@ -1,0 +1,77 @@
+.tower-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.tower-power {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+}
+
+.tower-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
+    gap: 5px;
+    background-color: #333;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.tower-cell {
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.1s;
+    user-select: none;
+}
+
+.tower-cell:hover {
+    transform: scale(1.05);
+    background-color: #fff;
+}
+
+.tower-cell .val {
+    font-size: 0.9rem;
+}
+
+.tower-cell.player {
+    background-color: var(--accent-blue);
+    color: white;
+}
+
+.tower-cell.weapon {
+    background-color: #8ce68c;
+    color: #006600;
+}
+
+.tower-cell.enemy {
+    background-color: #ff9999;
+    color: #990000;
+}
+
+.tower-cell.boss {
+    background-color: var(--accent-red);
+    color: white;
+    border: 2px solid gold;
+}
+
+.tower-cell.empty {
+    background-color: #f5f5f5;
+    cursor: default;
+}
+.tower-cell.empty:hover {
+    transform: none;
+}
